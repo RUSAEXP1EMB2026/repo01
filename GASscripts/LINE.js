@@ -31,23 +31,54 @@ function doPost(e) {
         }
 
         if (userMessage === "路線を設定する") {
-          replyMessage(replyToken, "始発駅を先頭に始を入れて入力してください。正式名称で入力してください。　\n(例:始　〇〇駅)");
+          replyMessage(replyToken, "乗っている路線を入力してください。正式名称で入力してください。２線以上登録する場合はスペースで区切ってください。最大 3　\n(例:京都線 神戸線)");
           return; 
         }
 
-        if(userMessage.includes("始")&&userMessage.includes("駅")){
+        if(userMessage.includes("線")){
           const trainConfig = userMessage.split(/[\s　]+/);
-          if(trainConfig.length === 2){
+          if(trainConfig.length === 1){
 
           const start = trainConfig[0];
-          const startTrain = trainConfig[1];
 
-          replyMessage(replyToken,"記録されました。" + startTrain + "を登録します。");
+          saveRoute(userId,start);
+
+          replyMessage(replyToken,"記録されました。" + start + "を登録します。");
 
           
 
 
           return;
+          }else if(trainConfig.length === 2){
+
+          const start = trainConfig[0];
+          const start2 = trainConfig[1];
+
+          saveRoute(userId,start + start2);
+
+          replyMessage(replyToken,"記録されました。" + start + start2 +"を登録します。");
+
+          
+
+
+          return;
+
+          }else if(trainConfig.length === 3){
+
+          const start = trainConfig[0];
+          const start2 = trainConfig[1];
+          const start3 = trainConfig[2];
+
+          saveRoute(userId,start + start2 + start3);
+
+          replyMessage(replyToken,"記録されました。" + start + start2 + start3 + "を登録します。");
+
+          
+
+
+          return;
+          
+          
           }else{
 
             replyMessage(replyToken,"記録できませんでした。スペースが入っているかなどを確認してください。")
