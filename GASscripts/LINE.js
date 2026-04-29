@@ -20,6 +20,8 @@ function doPost(e) {
 
         if (userMessage === "起床時間を設定する") {
           replyMessage(replyToken, "記録したい曜日と時刻を先頭に朝をつけてスペース区切りで入力してください。\n（例：朝　月曜 15:30）");
+
+        
           return; 
         }
 
@@ -41,6 +43,8 @@ function doPost(e) {
           const startTrain = trainConfig[1];
 
           replyMessage(replyToken,"記録されました。" + startTrain + "を登録します。");
+
+          
 
 
           return;
@@ -67,6 +71,8 @@ function doPost(e) {
 
           replyMessage(replyToken,"記録されました。" + morning + morningWeek +morningTime + "に起動します。");
 
+          saveWakeTime(userId,morningWeek,morningTime);
+
           return;
 
           }
@@ -89,6 +95,8 @@ function doPost(e) {
           const night = nightConfig[0];  //朝
           const nightWeek = nightConfig[1];　　//曜日
           const nightTime = nightConfig[2];
+
+          saveSleepTime(userId,nightWeek,nightTime);
 
           replyMessage(replyToken,"記録されました。" + night + nightWeek + nightTime + "に起動します。");
 
