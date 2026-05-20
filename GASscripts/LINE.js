@@ -2,11 +2,11 @@
 
 // LINE Webhookの受信エンドポイント
 function doPost(e) {
-  try {
+  try {　
     if (!e || !e.postData || !e.postData.contents) {
       return ContentService.createTextOutput("No data");
     }
-
+　
     const body = JSON.parse(e.postData.contents);
     const events = body.events || [];
     
@@ -31,7 +31,7 @@ function doPost(e) {
         }
 
         if (userMessage === "路線を設定する") {
-          replyMessage(replyToken, "乗っている路線を入力してください。正式名称で入力してください。２線以上登録する場合はスペースで区切ってください。最大 3　\n(例:京都線 神戸線)");
+          replyMessage(replyToken, "乗っている路線を入力してください。正式名称で入力してください。２線以上登録する場合はスペースで区切ってください。登録できる路線は次のURLで確認できます。https://transit.yahoo.co.jp/diainfo/area/6  最大3路線まで登録できます。　\n(例:JR京都線 JR神戸線)");
           return; 
         }
 

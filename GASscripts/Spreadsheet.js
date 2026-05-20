@@ -18,7 +18,8 @@ const COL = {
   SAT_SLEEP: 13,
   SUN_WAKE: 14,
   SUN_SLEEP: 15,
-  ROUTE: 16
+  ROUTE: 16,
+  API:17
 };
 
 // シート取得
@@ -32,7 +33,7 @@ function getSheet() {
       "userId","月起床","月就寝","火起床","火就寝",
       "水起床","水就寝","木起床","木就寝",
       "金起床","金就寝","土起床","土就寝",
-      "日起床","日就寝","路線"
+      "日起床","日就寝","路線","API"
     ]);
   }
 
@@ -96,4 +97,14 @@ function saveRoute(userId, route) {
   const row = getUserRow(userId);
   sheet.getRange(row, COL.ROUTE).setValue(route);
 }
+
+// API欄を取得する
+  function getApi(userId) {
+  const properties = PropertiesService.getScriptProperties();
+  const key = "REMO_" + userId;
+  
+  // 保存されているトークンを返す（未登録ならnullが返る）
+  return properties.getProperty(key);
+}
+
 
